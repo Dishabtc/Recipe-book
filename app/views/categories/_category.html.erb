@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-4">
+	<table border = '1'>
+
+	<thead>
+		<tr>
+	      <td>Category</td>
+	    </tr>
+	</thead>
+	<% @categories.each do |c|%>
+	   		<tr>
+				<td>
+					<%= link_to c.name, category_path(c) %>
+				</td>
+			</tr>
+	    </table>
+	<% end %>
+  </div>
+</div>

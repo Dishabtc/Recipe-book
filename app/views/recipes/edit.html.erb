@@ -1,0 +1,21 @@
+<%= form_for(@recipe, html: { multipart: true }) do |f| %>
+  <%= render 'shared/error_messages' %>
+  <div class="field">
+	<%= f.label :recipe_name %>
+	<%= f.text_field :name, class: 'form-control'%>
+
+	<%= f.label :category %>
+	<%= f.collection_select(:category_id , Category.all, :id, :name) %>
+
+	<%= f.label :ingredients %>
+	<%= f.text_area :ingredients, class: 'form-control' %>
+
+	<%= f.label :method %>
+	<%= f.text_area :method, class: 'form-control' %>
+	<span class = "picture">
+    <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+    </span>
+    <%= f.submit "Update Your Profile", class: "btn btn-primary"  %>
+  </div>
+  
+<% end %>

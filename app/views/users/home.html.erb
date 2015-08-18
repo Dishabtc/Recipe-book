@@ -1,0 +1,17 @@
+<% provide(:title, "Home") %>
+<!DOCTYPE html>
+<html>
+<body>
+  
+<% if user_signed_in? %>
+  <div class="row">
+  <div class="col-md-6">
+    <%= render 'categories/category' %>
+  </div>
+  </div>
+<% else %>
+   <%= link_to "Sign up now!", new_user_registration_path, :target => "_blank" %> 
+<% end %>
+</body>
+</html>
+

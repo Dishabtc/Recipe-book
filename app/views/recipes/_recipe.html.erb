@@ -1,0 +1,26 @@
+<div class = "detail" id="recipe-<%= recipe.id %>">
+	<div class="row">
+	<div class="col-md-6">
+	<span class="current_user"><%= link_to recipe.name, recipe_path(current_user) %></span>
+	</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <%= link_to image_tag(recipe.picture.url), recipe_path(current_user) if recipe.picture? %>
+</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+	<span class="timestamp">
+	    Posted <%= time_ago_in_words(recipe.created_at) %> ago.
+	    <% if current_user %>
+	    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %> | 
+	    <%= link_to " Edit", edit_recipe_path(recipe) %>
+	    <% end %>
+	</span>
+	</div>
+	</div>
+</div>
+  
