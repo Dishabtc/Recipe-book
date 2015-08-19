@@ -5,14 +5,11 @@ class UsersController < ApplicationController
      @categories = Category.all
     else
       render 'home'
-      
-
-
   end
   end
   def show
     @user = User.find(params[:id])
-    @recipes = current_user.recipes.paginate(page: params[:page])
+    @recipes = current_user.recipes.paginate(page: params[:page], per_page: 1)
   end
 
   def new
@@ -20,7 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(user_params.merge!(role_id:1))
     if @user.save
       flash[:success] = "Welcome!"
       redirect_to @user

@@ -1,19 +1,11 @@
 <div class="row">
-  <div class="col-md-4">
-	<table border = '1'>
-
-	<thead>
-		<tr>
-	      <td>Category</td>
-	    </tr>
-	</thead>
+  <ul class="col-md-8">
+	<h3>Category</h3>
+	<br>
 	<% @categories.each do |c|%>
-	   		<tr>
-				<td>
-					<%= link_to c.name, category_path(c) %>
-				</td>
-			</tr>
-	    </table>
+	<li style = "list-style-type: none;">
+	<h4><%= link_to c.name, category_path(c) %></h4>
+	</li>
+	
 	<% end %>
-  </div>
 </div>

@@ -1,13 +1,15 @@
 <% provide(:title, current_user.email) %>
+<%= will_paginate @recipes %>
 <div class="row">
   <div class="col-md-6">
     <% if @recipes %>
       <h3>Your Recipe List (<%= current_user.recipes.count %>)</h3>
-      
+      <ul style = "list-style-type: none;">
       <%= render partial:'shared/recipe',collection: @recipes %>
-      
+      </ul>
     <% end %>
   </div>
 </div>
+<%= will_paginate @recipes %>
 
 

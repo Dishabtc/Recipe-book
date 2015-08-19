@@ -3,7 +3,7 @@ class RecipesController < ApplicationController
   before_action :correct_user, only: :destroy
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.paginate(page: params[:page], per_page: 1)
     @categories = Category.all
     
     
@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipes = current_user.recipes 
+    @recipes = current_user.recipes.paginate(page: params[:page], per_page: 1)
     
     
 

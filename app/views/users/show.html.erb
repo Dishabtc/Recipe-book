@@ -1,22 +1,20 @@
 <% provide(:title, current_user.email) %>
+<%= will_paginate @recipes %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h2>
-        <%= gravatar_for current_user %>
-        <%= current_user.email %>
-      </h2>
-    </section>
+  <aside class="col-md-2">
+    <h2>
+      <%= gravatar_for current_user %>
+      <%= current_user.email %>
+    </h2>  
   </aside>
-  <div class="col-md-8">
+  <div class="col-md-10">
     <% if @recipes.any? %>
-      <h3>Your Recipes (<%= current_user.recipes.count %>)</h3>
-      <ol class="recipes">
-      <%= will_paginate @recipes %>
-        <%= render partial: 'recipes/recipe', collection: @recipes %>
-      </ol>
       
-    <% end %>
+        <h3>Your Recipe</h3>
+        <ul style = "list-style-type: none;">
+            <%= render partial: 'recipes/recipe', collection: @recipes %>
+        </ul>
+      <% end %>
   </div>
 </div>
 <%= will_paginate @recipes %>

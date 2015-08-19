@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
-    @recipes = @category.recipes
+    @recipes = @category.recipes.paginate(page: params[:page], per_page: 1)
 
   end 
 

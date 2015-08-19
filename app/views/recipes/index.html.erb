@@ -1,25 +1,24 @@
 <div class = "row">
-<aside class = "col-md-6">
-  <%= render 'categories/category' %>
-</aside>
+  <aside class = "col-md-4">
+    <%= render 'categories/category' %>
+  </aside>
+
+
+<div class = "col-md-4">
+  <h3><marquee> How to Make This Item? Go to Category List..</marquee></h3>
+  </div>
+  
 
   <div class="col-md-6">
-  
-  <h4>Your Recipe List (<%= @recipes.count %>)</h4>
-<% @recipes.each do |r| %>
-    <table>
-    <tr>
-    <td><h4> Category :</h4><%= r.category.name %></td>
-    </tr>
-    <tr>
-    <td><%= image_tag r.picture.url if r.picture? %></td>
-    </tr>
-    <tr>
-    <td><h4> Recipe Name :</h4><%= r.name %></td>
-    </tr>
-    </table>
-<% end %>
-  
+
+    <h3>All Recipes (<%= @recipes.count %>)</h3>
+     <%= will_paginate @recipes %>
+      <ul style = "list-style-type: none;">
+        <%= render @recipes %>
+      </ul>
+      <%= will_paginate @recipes %>
   </div>
-  </div>
+  
+</div>
+
  

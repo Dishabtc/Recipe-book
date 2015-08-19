@@ -1,8 +1,10 @@
+<%= will_paginate @recipes %>
 <div class="row">
   <div class="col-md-6">
       <h3> <%= @category.name %></h3>
-      <table>
+      <ul style = "list-style-type: none;">
       <%= render partial:'shared/recipe',collection: @recipes %>
-      </table>
+      </ul>
   </div>
 </div>
+<%= will_paginate @recipes %>
