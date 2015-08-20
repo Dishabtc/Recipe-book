@@ -1,4 +1,6 @@
 class Recipe < ActiveRecord::Base
+  has_many :favorite_recipes
+  has_many :favorites, through: :favorite_recipes, source: :user
   belongs_to :user
   belongs_to :category
   default_scope -> { order(created_at: :desc) }
@@ -9,6 +11,7 @@ class Recipe < ActiveRecord::Base
   validates :method, presence: true, length: { maximum: 10000 } 
   validate :picture_size
   validates :category_id, presence: true
+  validates_uniqueness_of :user_id, scope: :recipe_id
 
   private
 

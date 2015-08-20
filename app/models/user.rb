@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :favorite_recipes  
+  has_many :favorites, through: :favorite_recipes, source: :recipe
   has_many :recipes
   belongs_to :role
   before_create :set_default_role

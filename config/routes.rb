@@ -8,18 +8,19 @@ Rails.application.routes.draw do
     post 'user_session_path' => 'devise/sessions#create'
     delete 'destroy_user_session_path' => 'devise/sessions#destroy' 
   end
+
+  resources :users
     
-  resources :users do
-    
-  end
 
   resources :recipes do
     get 'new_recipe_path' => 'recipes#new'
     get 'edit_recipe_path' => 'recipes#edit'
     get 'recipes_path' => 'recipes#index'
+    put :favorite, on: :member
   end
 
 resources :categories
+
     
 
   # The priority is based upon order of creation: first created -> highest priority.

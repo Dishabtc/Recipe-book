@@ -1,5 +1,5 @@
 <% provide(:title, current_user.email) %>
-<%= will_paginate @recipes %>
+
 <div class="row">
   <aside class="col-md-2">
     <h2>
@@ -7,7 +7,8 @@
       <%= current_user.email %>
     </h2>  
   </aside>
-  <div class="col-md-10">
+  <div class="col-md-6">
+  <%= will_paginate @favorite_recipe %>
     <% if @recipes.any? %>
       
         <h3>Your Recipe</h3>
@@ -16,5 +17,20 @@
         </ul>
       <% end %>
   </div>
+
+
+
+
+<div class="col-md-4">
+<%= will_paginate @favorite_recipe %>
+    <% if @favorite_recipe %>
+      
+        <h3>Your Favorite Recipe</h3>
+        <ul style = "list-style-type: none;">
+            <%= render @favorite_recipe %>
+        </ul>
+      <% end %>
+  </div>
 </div>
-<%= will_paginate @recipes %>
+
+

@@ -2,12 +2,51 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: :destroy
 
+  def favorite
+     @recipe = Recipe.find(params[:id])
+      type = params[:type]
+      if type == "favorite"
+        @recipe1 = current_user.favorite_recipes.build(recipe_id: params[:id])
+        @recipe1.save
+        redirect_to :back
+        flash[:success] = "You favorited #{@recipe.name}"
+
+      elsif type == "unfavorite"
+        current_user.favorites.delete(@recipe)
+        redirect_to :back 
+        flash[:danger] = "Unfavorited #{@recipe.name}"
+
+      else
+        redirect_to :back
+        flash[:info] = 'Nothing happened.'
+      end
+    end
+    
+    
+  #   if params[:type] == "favorite"
+  #     @recipe = Recipe.find(params[:id])
+  #     @recipes = current_user.favorites.build
+  #     # puts "============================#{@recipe.inspect}"
+  #     @recipes.save
+  #     # recipe = @recipe.update_attributes(params[:id])
+
+  #     redirect_to :back, notice: 'You Favorited #{@recipe.name}'
+
+  #   elsif type == "unfavorite"
+  #     current_user.favorite_recipes.delete(@recipe)
+  #     redirect_to :back, notice: 'Unfavorited #{@recipe.name}'
+
+  #   else
+  #     redirect_to :back, notice: 'Nothing happened.'
+  #   end
+  # end
+
+
   def index
-    @recipes = Recipe.all.paginate(page: params[:page], per_page: 1)
-    @categories = Category.all
-    
-    
+      @recipes = Recipe.all.paginate(page: params[:page], per_page: 1)
+      @categories = Category.all
   end
+
   
   def new
     @recipe = Recipe.new
@@ -19,7 +58,7 @@ class RecipesController < ApplicationController
       flash[:success] = "Recipe created!"
      redirect_to root_url
     else
-      @feed_items = []
+     
       flash[:danger] = "Fill All field"
       render "new"
     end
@@ -33,9 +72,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipes = current_user.recipes.paginate(page: params[:page], per_page: 1)
-    
-    
-
+    @favorite_recipe = current_user.favorites.paginate(page: params[:page], per_page: 1)
   end
 
   def edit
@@ -56,7 +93,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :picture)
+      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :picture, :type)
     end
 
     def correct_user
