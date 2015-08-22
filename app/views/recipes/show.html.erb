@@ -1,6 +1,8 @@
 <% provide(:title, current_user.email) %>
 <%= will_paginate @recipes %>
 <div class="row">
+
+
   <div class="col-md-6">
     <% if @recipes %>
       <h3>Your Recipe List (<%= current_user.recipes.count %>)</h3>

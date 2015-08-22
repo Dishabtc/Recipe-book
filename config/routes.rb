@@ -10,14 +10,13 @@ Rails.application.routes.draw do
   end
 
   resources :users
-    
+      
 
   resources :recipes do
-    get 'new_recipe_path' => 'recipes#new'
-    get 'edit_recipe_path' => 'recipes#edit'
-    get 'recipes_path' => 'recipes#index'
+    
     put :favorite, on: :member
-  end
+    end
+  resources :favorite_recipes,       only: [:create, :destroy]
 
 resources :categories
 

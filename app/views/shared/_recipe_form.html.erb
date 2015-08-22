@@ -4,7 +4,7 @@
 	<%= f.label :recipe_name %>
 	<%= f.text_field :name, class: 'form-control'%>
     <%= f.label :category %>
-	<%= f.collection_select(:category_id , Category.all, :id, :name) %>
+	<%= f.collection_select(:category_id , Category.all, :id, :name,prompt: true) %>
 
 	<%= f.label :ingredients %>
 	<%= f.text_area :ingredients, class: 'form-control' %>

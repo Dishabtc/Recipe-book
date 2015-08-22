@@ -11,7 +11,10 @@ class Recipe < ActiveRecord::Base
   validates :method, presence: true, length: { maximum: 10000 } 
   validate :picture_size
   validates :category_id, presence: true
-  validates_uniqueness_of :user_id, scope: :recipe_id
+
+
+  
+ 
 
   private
 

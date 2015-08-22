@@ -8,7 +8,7 @@
     </h2>  
   </aside>
   <div class="col-md-6">
-  <%= will_paginate @favorite_recipe %>
+  
     <% if @recipes.any? %>
       
         <h3>Your Recipe</h3>
@@ -18,11 +18,8 @@
       <% end %>
   </div>
 
-
-
-
 <div class="col-md-4">
-<%= will_paginate @favorite_recipe %>
+
     <% if @favorite_recipe %>
       
         <h3>Your Favorite Recipe</h3>
@@ -33,4 +30,5 @@
   </div>
 </div>
 
-
+<%= will_paginate @favorite_recipe %>
+<%= will_paginate @recipes %>

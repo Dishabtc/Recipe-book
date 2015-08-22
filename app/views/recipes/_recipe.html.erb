@@ -6,12 +6,9 @@
 	    <% if recipe.user_id == current_user.id %>
 	    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %> | 
 	    <%= link_to " Edit", edit_recipe_path(recipe) %>
-
-	    <% elsif @favorite_recipe %>
-		   <%= link_to "unfavorite", favorite_recipe_path(recipe, type: "unfavorite"), method: :put, class: "btn btn-primary" %>
-
-		  <% else %>
-		  <%= link_to "favorite",   favorite_recipe_path(recipe, type: "favorite"), method: :put, class: "btn btn-primary"  %>
+	   
+   
+	   
 		<% end %>
 	    
 	   </span>

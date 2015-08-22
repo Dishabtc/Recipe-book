@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
   before_action :correct_user, only: :destroy
+  
 
   def favorite
      @recipe = Recipe.find(params[:id])
@@ -43,8 +44,13 @@ class RecipesController < ApplicationController
 
 
   def index
+    if params[:r].present?
+      @recipes = Recipe.where('name like ?', "%#{params[:r]}%").paginate(page: params[:page], per_page: 1)
+    else
       @recipes = Recipe.all.paginate(page: params[:page], per_page: 1)
-      @categories = Category.all
+    end
+    @categories = Category.all
+    @favorite_recipe = current_user.favorites
   end
 
   
@@ -52,13 +58,12 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
   end
 
-  def create
+  def create 
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       flash[:success] = "Recipe created!"
-     redirect_to root_url
-    else
-     
+      redirect_to root_url
+    else  
       flash[:danger] = "Fill All field"
       render "new"
     end
@@ -80,20 +85,20 @@ class RecipesController < ApplicationController
   end
 
   def update
-  @recipe = Recipe.find(params[:id])
-  if @recipe.update_attributes(recipe_params)
-    flash[:success] = "profile Updated"
-    redirect_to @recipe
-    #handle a successful update. 
-  else
-    render 'edit'
-  end
+    @recipe = Recipe.find(params[:id])
+    if @recipe.update_attributes(recipe_params)
+      flash[:success] = "profile Updated"
+      redirect_to @recipe
+      #handle a successful update. 
+    else
+      render 'edit'
+    end
   end
 
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :picture, :type)
+      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :picture)
     end
 
     def correct_user
