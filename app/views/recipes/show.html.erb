@@ -1,17 +1,22 @@
-<% provide(:title, current_user.email) %>
-<%= will_paginate @recipes %>
+<% provide(:title, @recipe.name) %>
+
 <div class="row">
 
 
   <div class="col-md-6">
-    <% if @recipes %>
-      <h3>Your Recipe List (<%= current_user.recipes.count %>)</h3>
+    <% if @recipe %>
+      
       <ul style = "list-style-type: none;">
-      <%= render partial:'shared/recipe',collection: @recipes %>
+		  <li style = "list-style-type: disc;"><big> Category : </big><%= @recipe.category.name %></li>
+		  <li><big> Recipe Name : </big><%= @recipe.name %></li>
+		  <li><%= image_tag @recipe.picture.url if @recipe.picture? %></li>
+		  <li><big> Ingredients : </big><%= @recipe.ingredients %></li>
+		  <li><big> Method : </big><%= @recipe.method %></li>
+      
       </ul>
     <% end %>
   </div>
 </div>
-<%= will_paginate @recipes %>
+
 
 

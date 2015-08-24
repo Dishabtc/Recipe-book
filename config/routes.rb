@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
   root "users#home"
-
+  get 'tags/:tag', to: 'recipes#index', as: :tag
+  
   devise_for :users do
     get 'new_user_registration_path' => 'devise/registrations#new'
     get 'new_user_session_path' => 'devise/sessions#new' 

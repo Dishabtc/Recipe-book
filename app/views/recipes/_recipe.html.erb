@@ -1,15 +1,21 @@
+
+
 <div class = "detail" id="recipe-<%= recipe.id %>">
-	<li style = "font-size: 20px"><%= link_to recipe.name, recipe_path(current_user) %></li>
-    <li><%= link_to image_tag(recipe.picture.url), recipe_path(current_user) if recipe.picture? %></li>
+
+	<li style = "font-size: 20px"><%= link_to recipe.name, recipe_path(recipe) %></li>
+    <li><%= link_to image_tag(recipe.picture.url), recipe_path(recipe) if recipe.picture? %></li>
+    <li>Tags: <%= raw recipe.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></li>
 	<li><span class="timestamp">
 	    Posted <%= time_ago_in_words(recipe.created_at) %> ago.
 	    <% if recipe.user_id == current_user.id %>
 	    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %> | 
 	    <%= link_to " Edit", edit_recipe_path(recipe) %>
-	   
-   
-	   
-		<% end %>
+	    
+	    <% elsif recipe.favorited_by.include?(current_user) %>
+   		 	<%= link_to "unfavorite", favorite_recipe_path(recipe, type: "unfavorite"), method: :put, class: "btn btn-primary" %>
+   		 <% else %>
+  			<%= link_to "favorite",   favorite_recipe_path(recipe, type: "favorite"), method: :put, class: "btn btn-primary" %>
+	    <% end %>
 	    
 	   </span>
 	</li>

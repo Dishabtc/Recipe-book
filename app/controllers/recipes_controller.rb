@@ -46,6 +46,8 @@ class RecipesController < ApplicationController
   def index
     if params[:r].present?
       @recipes = Recipe.where('name like ?', "%#{params[:r]}%").paginate(page: params[:page], per_page: 1)
+    elsif params[:tag].present?
+      @recipes = Recipe.tagged_with(params[:tag]).paginate(page: params[:page], per_page: 1)
     else
       @recipes = Recipe.all.paginate(page: params[:page], per_page: 1)
     end
@@ -76,7 +78,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipes = current_user.recipes.paginate(page: params[:page], per_page: 1)
+    @recipe = Recipe.find(params[:id])
     @favorite_recipe = current_user.favorites.paginate(page: params[:page], per_page: 1)
   end
 
@@ -98,7 +100,7 @@ class RecipesController < ApplicationController
   private
 
     def recipe_params
-      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :picture)
+      params.require(:recipe).permit(:name, :category_id, :ingredients, :method, :tag_list, :picture)
     end
 
     def correct_user

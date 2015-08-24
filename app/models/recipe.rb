@@ -1,6 +1,7 @@
 class Recipe < ActiveRecord::Base
+  acts_as_taggable
   has_many :favorite_recipes
-  has_many :favorites, through: :favorite_recipes, source: :user
+  has_many :favorited_by, through: :favorite_recipes, source: :user
   belongs_to :user
   belongs_to :category
   default_scope -> { order(created_at: :desc) }
@@ -13,8 +14,12 @@ class Recipe < ActiveRecord::Base
   validates :category_id, presence: true
 
 
+
+
   
- 
+  def favorited_by?(other_user)
+    favorited_by.include?(other_user)
+  end
 
   private
 

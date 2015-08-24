@@ -1,16 +1,14 @@
 <div class = "row">
   <aside class = "col-md-4">
     <%= render 'categories/category' %> 
-    <%= render "shared/search" %> 
-  
-  
-  
-  
+    <%= render "shared/search" %> <br>
+    <div id="tag_cloud">
+    <h3>=> Search Recipe from Following Tags</h3>
+  <% tag_cloud Recipe.tag_counts, %w[s m l] do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div> 
 </aside>
-<div class = "col-md-4">
-  <h3><marquee> How to Make This Item? Go to Category List..</marquee></h3>
-  </div>
-  
 
   <div class="col-md-6">
 

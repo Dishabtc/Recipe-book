@@ -11,6 +11,10 @@
 
 	<%= f.label :method %>
 	<%= f.text_area :method, class: 'form-control' %>
+
+	<%= f.label :tag_list, "Tags (separated by commas)" %>
+	<%= f.text_field :tag_list, class: 'form-control' %>
+
 	<span class = "picture">
     <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
     </span>
