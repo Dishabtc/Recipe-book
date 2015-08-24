@@ -1,0 +1,2 @@
+<% type = recipe.favorited_by.include?(current_user) ? 'unfavorite' : 'favorite'  %>
+<%= link_to type, favorite_recipe_path(recipe, type: type), method: :put, class: "btn btn-primary", remote: true %>

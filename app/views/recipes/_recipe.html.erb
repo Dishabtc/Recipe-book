@@ -8,17 +8,28 @@
 	<li><span class="timestamp">
 	    Posted <%= time_ago_in_words(recipe.created_at) %> ago.
 	    <% if recipe.user_id == current_user.id %>
-	    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %> | 
-	    <%= link_to " Edit", edit_recipe_path(recipe) %>
-	    
-	    <% elsif recipe.favorited_by.include?(current_user) %>
-   		 	<%= link_to "unfavorite", favorite_recipe_path(recipe, type: "unfavorite"), method: :put, class: "btn btn-primary" %>
-   		 <% else %>
-  			<%= link_to "favorite",   favorite_recipe_path(recipe, type: "favorite"), method: :put, class: "btn btn-primary" %>
-	    <% end %>
+		    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %> | 
+		    <%= link_to " Edit", edit_recipe_path(recipe) %>
+	    <% else %>
+	      <div id='favorite'>
+   		 	<%= render partial: "recipes/favorite_btn", locals: {recipe: recipe} %>
+   		  </div>
+   		<% end %>
 	    
 	   </span>
 	</li>
 </div>
 <br>
   
+<script type="text/javascript">
+$(".favorite").click(function() {
+  var recipe_id = $(this).attr('id');
+  $.ajax({
+    type: "PUT",
+    url: 'recipes/' + recipe_id
+  })
+})
+</script>
+
+
+

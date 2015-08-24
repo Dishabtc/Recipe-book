@@ -5,17 +5,26 @@ class RecipesController < ApplicationController
 
   def favorite
      @recipe = Recipe.find(params[:id])
+     
       type = params[:type]
       if type == "favorite"
-        @recipe1 = current_user.favorite_recipes.build(recipe_id: params[:id])
-        @recipe1.save
-        redirect_to :back
+        favorite_recipe = current_user.favorite_recipes.build(recipe_id: params[:id])
+        favorite_recipe.save
+        
         flash[:success] = "You favorited #{@recipe.name}"
+          respond_to do |format|
+          format.html 
+          format.js
+        end
 
       elsif type == "unfavorite"
         current_user.favorites.delete(@recipe)
-        redirect_to :back 
+        
         flash[:danger] = "Unfavorited #{@recipe.name}"
+        respond_to do |format|
+          format.html 
+          format.js
+        end
 
       else
         redirect_to :back
