@@ -1,10 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+
 /* universal */
 
 body {
-  
+  background-image: url("bg.jpg");
   padding-top: 70px;
 }
 

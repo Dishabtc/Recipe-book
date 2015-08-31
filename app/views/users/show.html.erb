@@ -1,13 +1,8 @@
 <% provide(:title, current_user.email) %>
 
 <div class="row">
-  <aside class="col-md-2">
-    <h2>
-      <%= gravatar_for current_user %>
-      <%= current_user.email %>
-    </h2>  
-  </aside>
-  <div class="col-md-6">
+  
+  <div class="col-md-4">
   
     <% if @recipes.any? %>
       
@@ -16,6 +11,7 @@
             <%= render partial: 'recipes/recipe', collection: @recipes %>
         </ul>
       <% end %>
+    <%= will_paginate @recipes %>  
   </div>
 
 <div class="col-md-4">
@@ -27,9 +23,19 @@
             <%= render @favorite_recipe %>
         </ul>
       <% end %>
+     <%= will_paginate @favorite_recipe %>
+  </div>
+
+  <div class="col-md-4">
+
+    <% if @like_recipe %>
+      
+        <h3>Your Liked Recipe</h3>
+        <ul style = "list-style-type: none;">
+            <%= render @like_recipe %>
+        </ul>
+      <% end %>
+      <%= will_paginate @like_recipe %>
   </div>
 </div>
 
-
-<%= will_paginate @recipes %>
-<%= will_paginate @favorite_recipe %>

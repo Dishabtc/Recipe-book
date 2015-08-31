@@ -14,8 +14,10 @@ Rails.application.routes.draw do
       
 
   resources :recipes do
-    
+  
+    put :like, on: :member
     put :favorite, on: :member
+    
     end
   resources :favorite_recipes,       only: [:create, :destroy]
 

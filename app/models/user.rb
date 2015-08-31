@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   belongs_to :role
   before_create :set_default_role
 
+  acts_as_voter 
+
   enum role: [:Member, :Admin, :Manager]
 
   private

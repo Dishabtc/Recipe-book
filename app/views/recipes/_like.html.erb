@@ -1,0 +1,7 @@
+
+<% type = recipe.liked_by_user?(current_user) ? 'unlike' : 'like' %>
+<%= link_to type, like_recipe_path(recipe, type: type), method: :put, class: "btn btn-primary", remote: true %>
+
+<span class="heart-no" data-id="<%= recipe.id %>"><%= recipe.get_likes.size %></span>
+
+      

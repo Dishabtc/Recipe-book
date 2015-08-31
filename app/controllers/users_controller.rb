@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
+  require 'will_paginate/array'
   
   def home
     if user_signed_in?
      @categories = Category.all
+     @recipes = Recipe.all
     else
       render 'home'
   end
@@ -11,7 +13,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @recipes = current_user.recipes.paginate(page: params[:page], per_page: 1)
      @favorite_recipe = current_user.favorites.paginate(page: params[:page], per_page: 1)
-  end
+     @like_recipe = current_user.find_liked_items.paginate(page: params[:page], per_page: 1)
+   end
 
   def new
     @user = User.new

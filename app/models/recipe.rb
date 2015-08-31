@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   acts_as_taggable
+  acts_as_votable
   has_many :favorite_recipes
   has_many :favorited_by, through: :favorite_recipes, source: :user
   belongs_to :user
@@ -15,7 +16,9 @@ class Recipe < ActiveRecord::Base
 
 
 
-
+  def liked_by_user?(user)
+    get_likes.where(voter_id: user).count > 0
+  end
   
   def favorited_by?(other_user)
     favorited_by.include?(other_user)

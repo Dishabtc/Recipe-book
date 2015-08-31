@@ -1,11 +1,12 @@
-<div class="row">
-  <ul class="col-md-8">
-	<h3>Category</h3>
-	<br>
-	<% @categories.each do |c|%>
-	<li style = "list-style-type: none;">
-	<h4><%= link_to c.name, category_path(c) %></h4>
-	</li>
-	
-	<% end %>
+<div class = "well">
+	<ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="205">
+		<li class="label label-primary col-lg-12" ><h4>Category</h4></li><br>
+			<% @categories.each do |c|%>
+				<li><%= link_to c.name, category_path(c) %></li>
+			<% end %>
+	</ul>
 </div>
+	
+
+
+

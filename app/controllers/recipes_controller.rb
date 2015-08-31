@@ -1,8 +1,33 @@
 class RecipesController < ApplicationController
+  require 'will_paginate/array'
   before_action :authenticate_user!
   before_action :correct_user, only: :destroy
-  
 
+
+  def like
+    @recipe = Recipe.find(params[:id])
+    type = params[:type]
+    if type == "like"
+      @recipe.liked_by current_user
+      flash[:success] = "You liked #{@recipe.name}"
+      respond_to do |format|
+        format.html 
+        format.js 
+      end
+    elsif type == "unlike"
+      @recipe = Recipe.find(params[:id])
+      @recipe.unliked_by current_user
+      flash[:danger] = "Unliked #{@recipe.name}"
+      respond_to do |format|
+        format.html 
+        format.js 
+      end
+  else
+    redirect_to :back
+    flash[:info] = 'Nothing happened.'
+  end
+end
+  
   def favorite
      @recipe = Recipe.find(params[:id])
      
@@ -88,7 +113,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @favorite_recipe = current_user.favorites.paginate(page: params[:page], per_page: 1)
+   
   end
 
   def edit

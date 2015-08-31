@@ -1,4 +1,11 @@
- <%= form_tag recipes_path, method: :get do %>
-    <%= text_field_tag :r %>
-    <%= submit_tag :serach, class: "btn btn-primary" %>
-    <% end %>
+<%= form_tag recipes_path, method: :get do %>
+<%= button_tag(type: 'submit', class: "btn btn-info pull-right") do %>
+	  <span class="glyphicon glyphicon-search"></span> 
+	  <% end %>
+	 <div class= "col-lg-4 pull-right">
+	  <%= text_field_tag :r %>
+	</div>
+	  
+<% end %>
+
+

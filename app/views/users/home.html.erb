@@ -1,17 +1,20 @@
-<% provide(:title, "Home") %>
-<!DOCTYPE html>
-<html>
-<body>
-  
+<% provide(:title, "Home") %>  
 <% if user_signed_in? %>
   <div class="row">
-  <div class="col-md-6">
-    <%= render 'categories/category' %>
+  <div class="col-md-3">
+    <h4><%= render 'categories/category' %></h4>
+    </div>
+    
+    <div class="col-md-8 pull-right ">
+    <h3>Latest Recipes</h3>
+    <marquee  width = '100%' height = '900px' direction = 'down' >
+     <ul style = "list-style-type: none;">
+
+    <%= render partial: "shared/marquee", locals: { recipes: @recipes } %></marquee>
+     </ul>
   </div>
   </div>
 <% else %>
    <%= link_to "Sign up now!", new_user_registration_path, :target => "_blank" %> 
 <% end %>
-</body>
-</html>
 
