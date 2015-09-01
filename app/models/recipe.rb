@@ -14,6 +14,13 @@ class Recipe < ActiveRecord::Base
   validate :picture_size
   validates :category_id, presence: true
 
+  
+  validate :validates_progression
+
+  def validates_progression
+     true # stub
+  end
+
 
 
   def liked_by_user?(user)

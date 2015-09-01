@@ -1,0 +1,7 @@
+<% if params[:type] == 'recipe' %>
+	$('.recipe1').html("<%= escape_javascript(render 'recipe')%>")
+	<% elsif params[:type] == 'favorite_recipe' %>
+		$('.favorite-recipe1').html("<%= escape_javascript(render 'favorite_recipe')%>")
+	<% elsif params[:type] == 'liked_recipe' %>
+		$('.liked-recipe1').html("<%= escape_javascript(render 'liked_recipe')%>")
+<% end %>

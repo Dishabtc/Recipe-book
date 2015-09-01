@@ -17,3 +17,26 @@
 //= require_tree .
 
 
+$(document).ready(function() {
+  $("body").on("click", '.pagination a',function(){
+    $.ajax({
+	  url: $(this).attr('href'),
+	  dataType: 'script',
+	}) ;
+	return false;
+  });
+});
+
+// $(document).ready(function() {
+//   $(".favorite-recipe th a, .favorite-recipe .pagination a").on("click", function(){
+//     $.getScript(this.href);
+//     return false;
+//   });
+// });
+
+// $(document).ready(function() {
+//   $(".liked-recipe th a, .liked-recipe .pagination a").on("click", function(){
+//     $.getScript(this.href);
+//     return false;
+//   });
+// });

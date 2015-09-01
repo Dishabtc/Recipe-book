@@ -9,15 +9,14 @@
 	    <% if (recipe.user_id == current_user.id)  %>
 		    <%= link_to "delete  ", recipe, method: :delete, data: {confirm: "You sure?"} %>| <%= link_to " Edit", edit_recipe_path(recipe) %>
 	    <% elsif recipe.user_id != current_user.id %>
-		      <div id='favorite'>
-	   		 	<%= render partial: "recipes/favorite_btn", locals: {recipe: recipe} %>
-	   		  </div>
-	   		   <% end %>
-   		  <br> 
-   		  <div id = 'like'>
-		  	<%= render partial: "recipes/like", locals: {recipe: recipe} %> 
-          </div> 
-   		
+	      	<div id='favorite'>
+   		 		<%= render partial: "recipes/favorite_btn", locals: {recipe: recipe} %>
+   		  	</div>
+	    <% end %>
+   		<br> 
+		    <div id = 'like'>
+		  		<%= render partial: "recipes/like", locals: {recipe: recipe} %> 
+		  	</div> 
    	    </span>
 	</li>
 </div>

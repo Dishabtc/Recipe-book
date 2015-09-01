@@ -1,41 +1,16 @@
 <% provide(:title, current_user.email) %>
 
-<div class="row">
-  
-  <div class="col-md-4">
-  
-    <% if @recipes.any? %>
-      
-        <h3>Your Recipe</h3>
-        <ul style = "list-style-type: none;">
-            <%= render partial: 'recipes/recipe', collection: @recipes %>
-        </ul>
-      <% end %>
-    <%= will_paginate @recipes %>  
+<div class="row"> 
+  <div class="col-md-4 recipe1">
+    <%= render 'recipe' %>
   </div>
 
-<div class="col-md-4">
-
-    <% if @favorite_recipe %>
-      
-        <h3>Your Favorite Recipe</h3>
-        <ul style = "list-style-type: none;">
-            <%= render @favorite_recipe %>
-        </ul>
-      <% end %>
-     <%= will_paginate @favorite_recipe %>
+  <div class="col-md-4 favorite-recipe1">
+    <%= render 'favorite_recipe' %>
   </div>
 
-  <div class="col-md-4">
-
-    <% if @like_recipe %>
-      
-        <h3>Your Liked Recipe</h3>
-        <ul style = "list-style-type: none;">
-            <%= render @like_recipe %>
-        </ul>
-      <% end %>
-      <%= will_paginate @like_recipe %>
+  <div class="col-md-4 liked-recipe1">
+    <%= render 'liked_recipe' %>
   </div>
 </div>
 

@@ -1,0 +1,8 @@
+ <% if @recipes.any? %>
+      
+        <h3>Your Recipe</h3>
+        <ul class = "recipe" style = "list-style-type: none;">
+          <%= render partial: 'recipes/recipe', collection: @recipes, remote: true %>
+        </ul>
+      <% end %>
+    <%= will_paginate @recipes, params:{ type: 'recipe'} %>  

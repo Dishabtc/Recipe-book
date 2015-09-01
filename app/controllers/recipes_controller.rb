@@ -113,7 +113,8 @@ end
 
   def show
     @recipe = Recipe.find(params[:id])
-   
+    @like_recipe = current_user.find_liked_items.paginate(page: params[:page], per_page: 1)
+    
   end
 
   def edit

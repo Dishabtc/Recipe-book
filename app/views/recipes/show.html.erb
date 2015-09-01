@@ -1,8 +1,6 @@
 <% provide(:title) %>
 
 <div class="row">
-
-
   <div class="col-md-6">
     <% if @recipe %>
       
@@ -12,10 +10,26 @@
 		  <li><%= image_tag @recipe.picture.url if @recipe.picture? %></li>
 		  <li><big> Ingredients : </big><%= @recipe.ingredients %></li>
 		  <li><big> Method : </big><%= @recipe.method %></li>
-      
       </ul>
     <% end %>
   </div>
+
+  <div class="col-md-6">
+    <% if @like_recipe %>
+      <table class = "table">
+      <tr>
+      <th>Recipe Name</th>
+      <th>Liked User</th>
+      </tr>
+      <tr>
+        <td><%= @recipe.name %></td>
+        <td><%= get_voter_name(@recipe) %></td>
+      </tr>
+      </table>
+    <% end %>
+  </div>
+
+
 </div>
 
 

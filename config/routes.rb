@@ -1,29 +1,31 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
+  # devise_for :users, :controllers => { :registrations => 'registrations' }
+  resources :users
   
   root "users#home"
   get 'tags/:tag', to: 'recipes#index', as: :tag
   
-  devise_for :users do
-    get 'new_user_registration_path' => 'devise/registrations#new'
-    get 'new_user_session_path' => 'devise/sessions#new' 
-    post 'user_session_path' => 'devise/sessions#create'
-    delete 'destroy_user_session_path' => 'devise/sessions#destroy' 
-  end
+  # devise_for :users do
+  #   get 'new_user_registration_path' => 'devise/registrations#new'
+  #   get 'new_user_session_path' => 'devise/sessions#new' 
+  #   post 'user_session_path' => 'devise/sessions#create'
+  #   delete 'destroy_user_session_path' => 'devise/sessions#destroy' 
+  # end
 
-  resources :users
-      
+
+
 
   resources :recipes do
-  
     put :like, on: :member
-    put :favorite, on: :member
-    
-    end
+    put :favorite, on: :member  
+  end
   resources :favorite_recipes,       only: [:create, :destroy]
-
-resources :categories
-
-    
+  resources :categories
+end    
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -79,4 +81,4 @@ resources :categories
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
+

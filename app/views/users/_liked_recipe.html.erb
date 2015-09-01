@@ -1,0 +1,8 @@
+<% if @like_recipe %>
+      
+        <h3>Your Liked Recipe</h3>
+        <ul class= "liked-recipe" style = "list-style-type: none;">
+          <%= render @like_recipe, remote: true %>
+        </ul>
+      <% end %>
+      <%= will_paginate @like_recipe, params:{ type: 'liked_recipe'} %>

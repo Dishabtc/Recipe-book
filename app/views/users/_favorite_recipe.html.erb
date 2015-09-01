@@ -1,0 +1,8 @@
+ <% if @favorite_recipe %>
+      
+        <h3>Your Favorite Recipe</h3>
+        <ul class = "favorite-recipe" style = "list-style-type: none;">
+          <%= render @favorite_recipe, remote: true %>
+        </ul>
+      <% end %>
+     <%= will_paginate @favorite_recipe, params:{ type: 'favorite_recipe'} %>
